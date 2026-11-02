@@ -1,0 +1,1221 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8fc">
+  <meta name="description" content="منصة جزائرية لاستكشاف الخدمات المستقلة ومشاركة المهارات المحلية.">
+  <title>KHDEMLI اخدملّي — منصة الفريلانس الجزائرية</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --navy: #152a53;
+      --blue: #174795;
+      --teal: #20a88d;
+      --muted: #64728a;
+      --line: #e5eaf2;
+      --soft: #f3f6fb;
+      --white: #fff;
+      --shadow: 0 16px 44px rgba(22, 47, 88, .08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--navy);
+      background: #fff;
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .shell { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
+
+    .topbar {
+      position: sticky;
+      z-index: 5;
+      top: 0;
+      background: rgba(255, 255, 255, .94);
+      border-bottom: 1px solid rgba(224, 230, 240, .9);
+      backdrop-filter: blur(14px);
+    }
+    .nav {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 12px; }
+    .brand-mark {
+      width: 48px; height: 48px; display: grid; place-items: center;
+      border-radius: 15px; color: #fff; background: var(--blue);
+      box-shadow: 0 7px 16px rgba(23, 71, 149, .18);
+    }
+    .brand-mark svg { width: 29px; height: 29px; }
+    .brand-copy { display: grid; gap: 2px; }
+    .brand-name { font-size: 22px; font-weight: 850; letter-spacing: .7px; direction: ltr; text-align: right; }
+    .brand-tagline { color: var(--muted); font-size: 12px; direction: ltr; text-align: right; }
+    .nav-actions { display: flex; align-items: center; gap: 11px; }
+    .nav-link { padding: 10px 13px; font-weight: 650; font-size: 14px; color: #53627b; }
+    .button {
+      min-height: 46px; display: inline-flex; justify-content: center; align-items: center; gap: 9px;
+      padding: 0 20px; border: 1px solid transparent; border-radius: 12px;
+      font-size: 14px; font-weight: 750; transition: transform .18s, box-shadow .18s, background .18s;
+      cursor: pointer;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { color: #fff; background: var(--blue); box-shadow: 0 8px 18px rgba(23, 71, 149, .17); }
+    .button-primary:hover { background: #103c82; box-shadow: 0 11px 22px rgba(23, 71, 149, .23); }
+    .button-outline { color: var(--blue); border-color: #d6e0f0; background: #fff; }
+    .button-outline:hover { background: #f6f8fc; }
+    .menu-toggle {
+      display: none; width: 44px; height: 44px; border: 1px solid var(--line);
+      border-radius: 12px; background: #fff; color: var(--navy); cursor: pointer;
+    }
+    .menu-toggle svg { width: 22px; height: 22px; }
+    .mobile-menu { display: none; padding: 0 0 18px; }
+    .mobile-menu.open { display: grid; gap: 8px; }
+    .mobile-menu a { padding: 12px; border-radius: 10px; background: var(--soft); font-weight: 650; }
+
+    .hero {
+      position: relative; overflow: hidden;
+      padding: 76px 0 67px;
+      background:
+        radial-gradient(ellipse at 11% 17%, rgba(32, 168, 141, .11), transparent 31%),
+        radial-gradient(ellipse at 88% 70%, rgba(72, 119, 210, .10), transparent 35%),
+        linear-gradient(135deg, #f6f8fc 0%, #f2f6fc 52%, #f8fafc 100%);
+    }
+    .hero::before, .hero::after {
+      content: ""; position: absolute; border: 1px solid rgba(23, 71, 149, .08);
+      border-radius: 50%; pointer-events: none;
+    }
+    .hero::before { width: 440px; height: 440px; top: -287px; left: -106px; }
+    .hero::after { width: 560px; height: 560px; bottom: -442px; right: -98px; }
+    .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1.12fr .88fr; align-items: center; gap: 74px; }
+    .hero-copy { max-width: 630px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px;
+      color: #287c72; background: #e8f6f2; border: 1px solid #d7eee8;
+      border-radius: 999px; font-size: 13px; font-weight: 700;
+    }
+    .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+    h1 { margin: 19px 0 16px; font-size: clamp(37px, 5vw, 58px); line-height: 1.32; letter-spacing: -.9px; }
+    h1 span { color: var(--blue); }
+    .hero-description { max-width: 570px; margin: 0; color: #65738a; font-size: 18px; line-height: 1.95; }
+    .hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .hero-buttons .button { min-height: 52px; padding-inline: 23px; }
+    .button svg { width: 18px; height: 18px; }
+    .hero-note { margin-top: 17px; color: #8290a5; font-size: 12px; }
+
+    .visual-card {
+      position: relative; padding: 24px; border: 1px solid #e6ebf3;
+      border-radius: 24px; background: rgba(255, 255, 255, .86);
+      box-shadow: 0 25px 70px rgba(39, 69, 117, .12);
+      transform: rotate(-1.2deg);
+    }
+    .visual-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 19px; }
+    .visual-title { font-size: 15px; font-weight: 800; }
+    .available { display: inline-flex; align-items: center; gap: 7px; color: #31917a; font-size: 11px; font-weight: 700; }
+    .available::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #38ba98; }
+    .service-preview { display: flex; align-items: center; gap: 13px; padding: 14px; border: 1px solid #edf0f5; border-radius: 16px; background: #fff; }
+    .service-preview + .service-preview { margin-top: 10px; }
+    .avatar {
+      width: 44px; height: 44px; display: grid; place-items: center; flex: 0 0 auto;
+      border-radius: 13px; color: var(--blue); background: #eaf0fc; font-size: 19px; font-weight: 800;
+    }
+    .avatar.mint { color: #258c78; background: #e8f6f1; }
+    .service-info { min-width: 0; flex: 1; }
+    .service-name { margin: 0 0 5px; font-size: 13px; font-weight: 750; }
+    .service-meta { display: flex; align-items: center; gap: 7px; color: #8792a5; font-size: 11px; }
+    .stars { color: #e6a632; }
+    .service-price { white-space: nowrap; font-size: 13px; font-weight: 800; color: var(--blue); }
+    .price-unit { display: block; margin-top: 3px; color: #97a1b1; font-size: 10px; font-weight: 500; }
+    .floating-note {
+      position: absolute; display: flex; align-items: center; gap: 10px;
+      padding: 11px 14px; border: 1px solid #e9edf4; border-radius: 13px; background: #fff;
+      box-shadow: 0 12px 28px rgba(34, 60, 103, .10); font-size: 12px; font-weight: 750;
+    }
+    .floating-note.top { top: -25px; left: -35px; }
+    .floating-note.bottom { bottom: -24px; right: -34px; }
+    .floating-icon { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 9px; color: #208d79; background: #eaf7f3; }
+    .floating-icon svg { width: 16px; height: 16px; }
+
+    .section { padding: 74px 0; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 27px; }
+    .section-kicker { display: block; margin-bottom: 8px; color: #29917c; font-size: 12px; font-weight: 800; }
+    .section h2 { margin: 0; font-size: 29px; letter-spacing: -.35px; }
+    .section-subtitle { margin: 10px 0 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
+    .text-link { display: inline-flex; align-items: center; gap: 8px; color: var(--blue); font-size: 14px; font-weight: 750; white-space: nowrap; }
+    .text-link svg { width: 17px; height: 17px; }
+    .category-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .category {
+      display: flex; align-items: center; gap: 15px; min-height: 104px; padding: 18px;
+      border: 1px solid var(--line); border-radius: 17px; background: #fff;
+      box-shadow: 0 5px 17px rgba(28, 54, 96, .035); transition: .2s ease;
+    }
+    .category:hover { border-color: #c7d5ed; box-shadow: var(--shadow); transform: translateY(-3px); }
+    .category-icon { width: 54px; height: 54px; display: grid; place-items: center; flex: 0 0 auto; color: var(--blue); background: #edf2fc; border-radius: 16px; }
+    .category-icon svg { width: 25px; height: 25px; stroke: currentColor; }
+    .category-name { font-size: 15px; font-weight: 750; }
+    .category-count { display: block; margin-top: 5px; color: #8b96a9; font-size: 12px; }
+    .category-arrow { margin-inline-start: auto; color: #99a6bb; }
+    .category-arrow svg { width: 17px; height: 17px; }
+
+    .steps-section { padding: 65px 0 76px; background: #f7f9fc; }
+    .center-heading { margin: 0 auto 34px; text-align: center; }
+    .center-heading .section-subtitle { margin-inline: auto; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .step {
+      position: relative; padding: 25px; border: 1px solid #e9edf4;
+      border-radius: 18px; background: #fff;
+    }
+    .step-number { position: absolute; top: 23px; left: 23px; color: #dce4f1; font-size: 25px; font-weight: 850; direction: ltr; }
+    .step-icon { width: 47px; height: 47px; display: grid; place-items: center; border-radius: 14px; color: #247e78; background: #e9f6f2; }
+    .step-icon svg { width: 22px; height: 22px; }
+    .step h3 { margin: 18px 0 8px; font-size: 16px; }
+    .step p { margin: 0; color: #748198; font-size: 13px; line-height: 1.8; }
+
+    .trust-wrap { padding: 64px 0; }
+    .trust-card {
+      display: flex; align-items: center; justify-content: space-between; gap: 28px;
+      padding: 31px 34px; border: 1px solid #e7edf6; border-radius: 22px;
+      background: linear-gradient(110deg, #f1f5fc, #f2f8f8);
+    }
+    .trust-content { display: flex; align-items: flex-start; gap: 16px; }
+    .trust-icon { width: 48px; height: 48px; display: grid; place-items: center; flex: 0 0 auto; color: #20937e; border-radius: 15px; background: #e1f3ee; }
+    .trust-icon svg { width: 25px; height: 25px; }
+    .trust-card h2 { margin: 0 0 8px; font-size: 21px; }
+    .trust-card p { max-width: 690px; margin: 0; color: #69788e; font-size: 14px; line-height: 1.9; }
+    .trust-card .button { flex: 0 0 auto; }
+
+    footer { border-top: 1px solid var(--line); }
+    .footer-inner { min-height: 105px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-brand .brand-mark { width: 39px; height: 39px; border-radius: 12px; }
+    .footer-brand .brand-name { font-size: 17px; }
+    .footer-brand .brand-tagline { font-size: 10px; }
+    .footer-copy { margin: 8px 0 0; color: #8a95a7; font-size: 11px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 22px; color: #758198; font-size: 12px; }
+    .footer-links a:hover { color: var(--blue); }
+    .app-page { min-height: 62vh; padding: 52px 0 72px; background: #f8fafd; }
+    .page-heading { margin-bottom: 26px; }
+    .page-heading h1 { margin: 0; font-size: clamp(28px, 4vw, 38px); letter-spacing: 0; }
+    .page-heading p { margin: 10px 0 0; color: var(--muted); line-height: 1.8; }
+    .form-card, .filter-card, .listing-card, .detail-card, .empty-card {
+      border: 1px solid var(--line); border-radius: 18px; background: #fff;
+      box-shadow: 0 8px 26px rgba(27, 52, 94, .045);
+    }
+    .form-card { width: min(100%, 700px); margin-inline: auto; padding: 28px; }
+    .form-card.narrow { width: min(100%, 510px); }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 17px; }
+    .field { display: grid; align-content: start; gap: 7px; min-width: 0; }
+    .field[hidden] { display: none; }
+    .field.full { grid-column: 1 / -1; }
+    .field label, .field-label { font-size: 13px; font-weight: 700; }
+    .field input, .field select, .field textarea, .filter-card input, .filter-card select {
+      width: 100%; min-height: 46px; padding: 11px 13px; border: 1px solid #dce3ed;
+      border-radius: 10px; outline: 0; color: var(--navy); background: #fff;
+      font: inherit; font-size: 14px;
+    }
+    .field textarea { min-height: 118px; resize: vertical; line-height: 1.7; }
+    .field input:focus, .field select:focus, .field textarea:focus, .filter-card input:focus, .filter-card select:focus {
+      border-color: #6d91ce; box-shadow: 0 0 0 3px rgba(23, 71, 149, .09);
+    }
+    .field-hint, .form-note { margin: 0; color: #7c899d; font-size: 12px; line-height: 1.7; }
+    .account-type-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .account-type-option {
+      display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 12px 14px;
+      border: 1px solid #dce3ed; border-radius: 12px; color: var(--navy); background: #f8fbff;
+      cursor: pointer; font-size: 14px; font-weight: 700;
+    }
+    .account-type-option input { width: 18px; height: 18px; margin: 0; accent-color: var(--blue); }
+    .account-type-option:has(input:checked) { border-color: var(--blue); background: #eaf0fc; }
+    .check-row { display: flex; align-items: flex-start; gap: 9px; color: #56657d; font-size: 13px; line-height: 1.8; }
+    .check-row input { width: 17px; min-height: 17px; margin-top: 5px; flex: 0 0 auto; accent-color: var(--blue); }
+    .form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 13px; margin-top: 20px; }
+    .form-message { display: none; margin: 15px 0 0; padding: 12px 14px; border-radius: 10px; font-size: 13px; line-height: 1.7; }
+    .form-message.visible { display: block; }
+    .form-message.error { color: #9d2d2d; background: #fff0f0; }
+    .form-message.success { color: #176e59; background: #eaf7f2; }
+    .auth-switch { margin: 20px 0 0; text-align: center; color: #718097; font-size: 13px; }
+    .auth-switch a { color: var(--blue); font-weight: 750; }
+    .auth-subtitle { margin: 5px 0 20px; color: var(--muted); font-size: 14px; }
+    .page-tools { display: flex; flex-wrap: wrap; gap: 11px; align-items: center; margin-bottom: 20px; }
+    .filter-card { display: grid; grid-template-columns: 2fr repeat(5, minmax(0, 1fr)); gap: 11px; padding: 15px; margin-bottom: 22px; }
+    .result-note { margin: 0 0 14px; color: #77849a; font-size: 13px; }
+    .listing-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; }
+    .listing-card { display: flex; flex-direction: column; padding: 19px; min-height: 210px; transition: .18s ease; }
+    a.listing-card:hover { border-color: #c7d5ed; box-shadow: var(--shadow); transform: translateY(-2px); }
+    .service-card-link { display: flex; flex: 1; flex-direction: column; color: inherit; }
+    .service-card-link:hover h2 { color: var(--blue); }
+    .service-delete { margin-top: 15px; color: #a33a3a; border-color: #ecd6d6; }
+    .service-delete:hover { background: #fff6f6; }
+    .listing-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .tag { display: inline-flex; align-items: center; min-height: 25px; padding: 3px 9px; border-radius: 999px; color: #286c72; background: #eaf5f4; font-size: 11px; font-weight: 700; }
+    .tag.demo { color: #736339; background: #f7f2e5; }
+    .listing-card h2, .listing-card h3 { margin: 15px 0 8px; font-size: 17px; line-height: 1.6; }
+    .listing-card p { margin: 0; color: #718097; font-size: 13px; line-height: 1.8; }
+    .listing-meta { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: auto; padding-top: 18px; color: #77849a; font-size: 12px; }
+    .listing-price { color: var(--blue); font-weight: 800; }
+    .empty-card { padding: 35px 22px; text-align: center; }
+    .empty-card h2 { margin: 0 0 8px; font-size: 19px; }
+    .empty-card p { margin: 0 0 17px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+    .detail-card { max-width: 760px; margin-inline: auto; padding: 28px; }
+    .detail-card h1 { margin: 14px 0; font-size: 30px; line-height: 1.5; }
+    .detail-description { color: #65738a; font-size: 15px; line-height: 2; white-space: pre-line; }
+    .notice-box { margin-top: 18px; padding: 13px 15px; border-radius: 11px; color: #5a6980; background: #f2f5fa; font-size: 13px; line-height: 1.8; }
+    .legal-copy { max-width: 820px; padding: 26px; border: 1px solid var(--line); border-radius: 17px; background: #fff; color: #596982; line-height: 2; }
+    .legal-copy h2 { margin: 22px 0 6px; color: var(--navy); font-size: 18px; }
+    .legal-copy h2:first-child { margin-top: 0; }
+    .legal-copy p { margin: 0; }
+    .profile-card { display: flex; align-items: center; gap: 15px; padding: 20px; margin-bottom: 24px; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
+    .profile-avatar { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 16px; color: var(--blue); background: #eaf0fc; font-size: 21px; font-weight: 800; }
+    .profile-card h2 { margin: 0 0 4px; font-size: 17px; }
+    .profile-card p { margin: 0; color: var(--muted); font-size: 13px; }
+    .profile-card .button { margin-inline-start: auto; }
+    .rating-summary { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 13px; margin: 12px 0 24px; }
+    .rating-stars { color: #e6a632; font-size: 20px; letter-spacing: 2px; direction: ltr; white-space: nowrap; }
+    .rating-average { font-size: 18px; font-weight: 800; }
+    .rating-count { color: var(--muted); font-size: 13px; }
+    .rating-list { display: grid; gap: 12px; margin-top: 16px; }
+    .rating-review { padding: 18px; border: 1px solid var(--line); border-radius: 15px; background: #fff; }
+    .rating-review-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .rating-review-header strong { font-size: 14px; }
+    .rating-review time { color: #8792a5; font-size: 11px; }
+    .rating-review .rating-stars { font-size: 16px; }
+    .rating-review p { margin: 10px 0 0; color: #596982; font-size: 14px; line-height: 1.8; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .rating-form { max-width: 700px; margin: 24px auto; padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
+    .rating-form h3 { margin: 0 0 14px; font-size: 17px; }
+    .admin-shell { max-width: 900px; margin-inline: auto; }
+    .admin-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+    .admin-list { display: grid; gap: 12px; }
+    .admin-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 18px; border: 1px solid var(--line); border-radius: 15px; background: #fff; }
+    .admin-row-copy { min-width: 200px; flex: 1; }
+    .admin-row-copy h3 { margin: 0 0 5px; font-size: 15px; }
+    .admin-row-copy p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .admin-messages { display: grid; gap: 10px; max-height: 55vh; overflow-y: auto; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: #f8fafd; }
+    .chat-shortcut { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 20px; margin-bottom: 30px; border: 1px solid #dce8f3; border-radius: 16px; background: linear-gradient(110deg, #f1f5fc, #f2f8f8); }
+    .chat-shortcut h2 { margin: 0 0 5px; font-size: 17px; }
+    .chat-shortcut p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .conversation-card { display: flex; align-items: center; gap: 14px; padding: 18px; border: 1px solid var(--line); border-radius: 15px; background: #fff; }
+    .conversation-card + .conversation-card { margin-top: 12px; }
+    .conversation-copy { min-width: 0; flex: 1; }
+    .conversation-copy h2 { margin: 0 0 5px; font-size: 15px; }
+    .conversation-copy p { margin: 0; overflow: hidden; color: var(--muted); font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+    .chat-panel { max-width: 760px; margin-inline: auto; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: #fff; box-shadow: var(--shadow); }
+    .chat-header { padding: 18px 22px; border-bottom: 1px solid var(--line); }
+    .chat-header h2 { margin: 0 0 5px; font-size: 17px; }
+    .chat-header p { margin: 0; color: var(--muted); font-size: 13px; }
+    .chat-messages { display: grid; gap: 11px; min-height: 210px; max-height: 440px; padding: 20px; overflow-y: auto; background: #f8fafd; }
+    .chat-message { max-width: min(80%, 480px); padding: 11px 14px; border: 1px solid #e6ebf3; border-radius: 14px 14px 14px 4px; background: #fff; }
+    .chat-message.mine { justify-self: end; border-color: #dce8fb; border-radius: 14px 14px 4px 14px; background: #edf4ff; }
+    .chat-message p { margin: 0; color: var(--navy); font-size: 14px; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .chat-message time { display: block; margin-top: 5px; color: #8792a5; font-size: 10px; }
+    .chat-form { display: flex; align-items: end; gap: 10px; padding: 15px; }
+    .chat-form .field { flex: 1; }
+    .chat-form textarea { min-height: 46px; max-height: 140px; }
+    @media (max-width: 860px) {
+      .nav-link, .nav-actions > .button { display: none; }
+      .menu-toggle { display: grid; place-items: center; }
+      .hero { padding: 58px 0 56px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 52px; }
+      .hero-copy { max-width: 680px; }
+      .visual-card { width: min(520px, 100%); margin-inline: auto; }
+      .category-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps { gap: 12px; }
+      .step { padding: 20px; }
+      .trust-card { align-items: flex-start; flex-direction: column; }
+      .filter-card { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .listing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 580px) {
+      .shell { width: min(100% - 32px, 460px); }
+      .nav { min-height: 70px; }
+      .brand-mark { width: 43px; height: 43px; }
+      .brand-name { font-size: 19px; }
+      .brand-tagline { font-size: 10px; }
+      .hero { padding: 44px 0 50px; }
+      h1 { font-size: 37px; }
+      .hero-description { font-size: 15px; }
+      .hero-buttons { display: grid; grid-template-columns: 1fr; }
+      .hero-buttons .button { padding-inline: 11px; font-size: 13px; }
+      .visual-card { padding: 17px; }
+      .floating-note.top { left: -6px; }
+      .floating-note.bottom { right: -4px; }
+      .section { padding: 55px 0; }
+      .section-heading { align-items: flex-start; }
+      .section h2 { font-size: 25px; }
+      .section-subtitle { font-size: 13px; }
+      .category-grid { grid-template-columns: 1fr; gap: 10px; }
+      .category { min-height: 86px; padding: 14px; }
+      .category-icon { width: 48px; height: 48px; }
+      .steps { grid-template-columns: 1fr; }
+      .steps-section { padding: 52px 0; }
+      .trust-wrap { padding: 48px 0; }
+      .trust-card { padding: 23px 19px; }
+      .trust-content { gap: 12px; }
+      .trust-card h2 { font-size: 18px; }
+      .trust-card p { font-size: 13px; }
+      .footer-inner { padding: 22px 0; align-items: flex-start; flex-direction: column; }
+      .footer-links { gap: 17px; }
+      .app-page { padding: 35px 0 52px; }
+      .form-card, .detail-card { padding: 20px 16px; }
+      .form-grid { grid-template-columns: 1fr; gap: 14px; }
+      .field.full { grid-column: auto; }
+      .filter-card, .listing-grid { grid-template-columns: 1fr; }
+      .page-tools { align-items: stretch; }
+      .page-tools .button { flex: 1; }
+      .profile-card { align-items: flex-start; flex-wrap: wrap; }
+      .profile-card .button { margin-inline-start: 0; }
+      .chat-shortcut { align-items: flex-start; flex-wrap: wrap; }
+      .chat-shortcut .button { width: 100%; }
+      .chat-form { align-items: stretch; flex-direction: column; }
+      .chat-form .button { align-self: flex-start; }
+      .conversation-card { align-items: flex-start; flex-wrap: wrap; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell">
+      <nav class="nav" aria-label="التنقل الرئيسي">
+        <a class="brand" href="#/" aria-label="KHDEMLI - الرئيسية">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><path d="M8 6v20M8 16 23 6M12 16l12 10" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 6h3M24 26h2" stroke="#36c5a4" stroke-width="4" stroke-linecap="round"/></svg>
+          </span>
+          <span class="brand-copy">
+            <span class="brand-name">KHDEMLI</span>
+            <span class="brand-tagline">La plateforme freelance algérienne</span>
+          </span>
+        </a>
+        <div class="nav-actions">
+          <a class="nav-link" data-auth-link hidden href="#/services">الخدمات</a>
+          <a class="nav-link" data-auth-link hidden href="#/messages">المحادثات</a>
+          <a class="nav-link" href="#/how-it-works">كيف تعمل المنصة؟</a>
+          <a class="button button-outline" href="#/auth?mode=login">تسجيل الدخول</a>
+          <a class="button button-primary" href="#/auth?mode=signup">إنشاء حساب</a>
+          <button class="menu-toggle" type="button" aria-label="فتح القائمة" aria-expanded="false" aria-controls="mobile-menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+        </div>
+      </nav>
+      <div class="mobile-menu" id="mobile-menu">
+        <a href="#/services">تصفح الخدمات</a>
+        <a href="#how-it-works">كيف تعمل المنصة؟</a>
+        <a href="#/auth?mode=login">تسجيل الدخول</a>
+        <a href="#/auth?mode=signup">إنشاء حساب</a>
+      </div>
+    </div>
+  </header>
+  <main id="home">
+    <section class="hero">
+      <div class="shell hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="eyebrow-dot"></span> Tes compétences. Tes opportunités.</span>
+          <h1>خدمتك عند مستقل جزائري، <span>وبالدينار.</span></h1>
+          <p class="hero-description">اكتشف خدمات المستقلين الجزائريين، واستعرض المهارات والأسعار في مكان واحد.</p>
+          <div class="hero-buttons">
+            <a class="button button-primary" href="#/services">
+              تصفح الخدمات
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m0 0 6 6m-6-6 6-6"/></svg>
+            </a>
+          </div>
+          <p class="hero-note">اتفاق مباشر خارج المنصة · خدمات من كل الولايات · الأسعار بالدينار الجزائري</p>
+        </div>
+        <div class="visual-card" aria-label="أضف خدمتك إلى المنصة">
+          <div class="visual-top">
+            <span class="visual-title">هل تقدم خدمة؟</span>
+            <span class="available">ابدأ الآن</span>
+          </div>
+          <p class="hero-description">أضف خدمتك الحقيقية وعرّف العملاء بمهاراتك وسعرك.</p>
+          <a class="button button-primary" href="#/services/new" style="width:100%;margin-top:16px">أضف خدمتك</a>
+          <div class="floating-note top"><span class="floating-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg></span>مهارات محلية، فرص أكبر</div>
+          <div class="floating-note bottom"><span class="floating-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20m5-17H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>تعامل بالدينار الجزائري</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="categories">
+      <div class="shell">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">اكتشف ما يناسب مشروعك</span>
+            <h2>تصفح حسب التصنيف</h2>
+            <p class="section-subtitle">كل المهارات التي تحتاجها، في مكان واحد.</p>
+          </div>
+          <a class="text-link" href="#/services">عرض كل الخدمات
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m0 0 6 6m-6-6 6-6"/></svg>
+          </a>
+        </div>
+        <div class="category-grid">
+          <a class="category" href="#/services?category=design">
+            <span class="category-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18h1a2 2 0 0 0 1.7-3.1l-.4-.6a1.6 1.6 0 0 1 1.3-2.5H18a3 3 0 0 0 3-3c0-4.9-4-8.8-9-8.8Z"/><path d="M7.5 11h.1m2-4h.1m5 0h.1m2 4h.1"/></svg></span>
+            <span><span class="category-name">التصميم والجرافيك</span><span class="category-count">شعارات، هويات بصرية وأكثر</span></span>
+            <span class="category-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m0 0 6 6m-6-6 6-6"/></svg></span>
+          </a>
+          <a class="category" href="#/services?category=programming">
+            <span class="category-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-5 4 5 4m8-8 5 4-5 4m-3-13-2 18"/></svg></span>
+            <span><span class="category-name">البرمجة والتطوير</span><span class="category-count">مواقع، تطبيقات وحلول رقمية</span></span>
+            <span class="category-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m0 0 6 6m-6-6 6-6"/></svg></span>
+          </a>
+          <a class="category" href="#/services?category=writing">
+            <span class="category-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M6 16l10-10 3 3-10 10-4 1 1-4Z"/></svg></span>
+            <span><span class="category-name">الكتابة والترجمة</span><span class="category-count">محتوى، تدقيق وترجمة</span></span>
+            <span class="category-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m0 0 6 6m-6-6 6-6"/></svg></span>
+          </a>
+          <a class="category" href="#/services?category=marketing">
+            <span class="category-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4h4l9 5V5l-9 5H3Zm4 4 2 6h4l-2.2-5.1M19 9a5 5 0 0 1 0 6"/></svg></span>
+            <span><span class="category-name">التسويق الرقمي</span><span class="category-count">إدارة منصات وإعلانات</span></span>
+            <span class="category-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m0 0 6 6m-6-6 6-6"/></svg></span>
+          </a>
+          <a class="category" href="#/services?category=video">
+            <span class="category-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="m3 8 9 6 9-6M8 4h8"/></svg></span>
+            <span><span class="category-name">الفيديو والمونتاج</span><span class="category-count">مونتاج، موشن وتصوير</span></span>
+            <span class="category-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m0 0 6 6m-6-6 6-6"/></svg></span>
+          </a>
+          <a class="category" href="#/services?category=business">
+            <span class="category-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18m-11 0v2h4v-2"/></svg></span>
+            <span><span class="category-name">الأعمال والاستشارات</span><span class="category-count">استشارات وخدمات احترافية</span></span>
+            <span class="category-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m0 0 6 6m-6-6 6-6"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="steps-section" id="how-it-works">
+      <div class="shell">
+        <div class="center-heading">
+          <span class="section-kicker">بكل بساطة</span>
+          <h2>من فكرتك إلى إنجازك</h2>
+          <p class="section-subtitle">خطوات واضحة تساعدك على الوصول للشخص المناسب.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <span class="step-number">01</span>
+            <span class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5m-10-10 2 2 4-4"/></svg></span>
+            <h3>ابحث وقارن</h3>
+            <p>تصفّح الخدمات وصفِّ حسب التصنيف والسعر والولاية لتجد ما يناسبك.</p>
+          </article>
+          <article class="step">
+            <span class="step-number">02</span>
+            <span class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"/></svg></span>
+            <h3>تواصل مع المستقلين</h3>
+            <p>تصفح الخدمات وابدأ محادثة خاصة مع مقدم الخدمة المناسب لك.</p>
+          </article>
+          <article class="step">
+            <span class="step-number">03</span>
+            <span class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span>
+            <h3>تواصل عبر المحادثة</h3>
+            <p>افتح تفاصيل الخدمة وتواصل مع صاحبها مباشرةً من داخل الموقع.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-wrap" id="join">
+      <div class="shell">
+        <div class="trust-card">
+          <div class="trust-content">
+            <span class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <div>
+              <h2>الشفافية قبل كل شيء</h2>
+              <p>لا تقييمات مزيفة ولا شارات وهمية. الدفع الإلكتروني غير مفعّل بعد، ويتم الاتفاق والدفع خارج المنصة.</p>
+            </div>
+          </div>
+          <a class="button button-primary" href="#/auth?mode=signup">إنشاء حساب مجانًا
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m0 0 6 6m-6-6 6-6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <div>
+        <a class="brand footer-brand" href="#/" aria-label="KHDEMLI - الرئيسية">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M8 6v20M8 16 23 6M12 16l12 10" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 6h3M24 26h2" stroke="#36c5a4" stroke-width="4" stroke-linecap="round"/></svg></span>
+          <span class="brand-copy"><span class="brand-name">KHDEMLI</span><span class="brand-tagline">La plateforme freelance algérienne</span></span>
+        </a>
+        <p class="footer-copy">Tes compétences. Tes opportunités.</p>
+      </div>
+      <nav class="footer-links" aria-label="روابط قانونية">
+        <a href="#/terms">شروط الاستخدام</a>
+        <a href="#/privacy">سياسة الخصوصية</a>
+        <span>© KHDEMLI 2026</span>
+      </nav>
+    </div>
+  </footer>
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mobileMenu = document.querySelector("#mobile-menu");
+    const app = document.querySelector("main");
+    const homeMarkup = app.innerHTML;
+    const categories = [
+      { id: "design", name: "التصميم والجرافيك" },
+      { id: "programming", name: "البرمجة والتطوير" },
+      { id: "writing", name: "الكتابة والترجمة" },
+      { id: "marketing", name: "التسويق الرقمي" },
+      { id: "video", name: "الفيديو والمونتاج" },
+      { id: "business", name: "الأعمال والاستشارات" }
+    ];
+    const wilayas = [
+      "أدرار", "الشلف", "الأغواط", "أم البواقي", "باتنة", "بجاية", "بسكرة", "بشار", "البليدة", "البويرة",
+      "تمنراست", "تبسة", "تلمسان", "تيارت", "تيزي وزو", "الجزائر", "الجلفة", "جيجل", "سطيف", "سعيدة",
+      "سكيكدة", "سيدي بلعباس", "عنابة", "قالمة", "قسنطينة", "المدية", "مستغانم", "المسيلة", "معسكر",
+      "ورقلة", "وهران", "البيض", "إليزي", "برج بوعريريج", "بومرداس", "الطارف", "تندوف", "تيسمسيلت",
+      "الوادي", "خنشلة", "سوق أهراس", "تيبازة", "ميلة", "عين الدفلى", "النعامة", "عين تموشنت",
+      "غرداية", "غليزان", "تيميمون", "برج باجي مختار", "أولاد جلال", "بني عباس", "عين صالح", "عين قزام",
+      "تقرت", "جانت", "المغير", "المنيعة"
+    ];
+    let currentUser = null;
+    let accounts = [];
+    let services = [];
+    let conversations = [];
+    let adminAuthenticated = false;
+    let messagePollingTimer = null;
+    let messagePollingInProgress = false;
+    const apiRequest = async (url, options = {}) => {
+      const response = await fetch(url, {
+        credentials: "same-origin",
+        ...options,
+        headers: { ...(options.body ? { "Content-Type": "application/json" } : {}), ...options.headers }
+      });
+      if (response.status === 204) return null;
+      const contentType = response.headers.get("content-type") || "";
+      if (!contentType.toLowerCase().includes("application/json")) {
+        throw new Error(`أعاد الخادم استجابة غير JSON (${response.status}). تأكد من تشغيل خادم الموقع وواجهة API.`);
+      }
+      let result;
+      try {
+        result = await response.json();
+      } catch {
+        throw new Error("تعذّر قراءة استجابة الخادم. تحقق من إعداد واجهة API.");
+      }
+      if (!response.ok) throw new Error(result.error || "تعذّر الاتصال بالخادم.");
+      return result;
+    };
+    const loadData = async () => {
+      const data = await apiRequest("/api/bootstrap");
+      currentUser = data.user;
+      accounts = data.accounts;
+      services = data.services;
+      conversations = data.conversations;
+    };
+    const syncMessagePolling = () => {
+      if (messagePollingTimer) clearInterval(messagePollingTimer);
+      messagePollingTimer = null;
+      const { path } = routeParts();
+      if (!currentUser || !(path === "/messages" || path.startsWith("/messages/"))) return;
+      messagePollingTimer = setInterval(async () => {
+        if (document.hidden || messagePollingInProgress) return;
+        messagePollingInProgress = true;
+        const previous = JSON.stringify(conversations);
+        const activeElement = document.activeElement;
+        const draft = activeElement?.matches?.('[data-form="message"] textarea') ? activeElement.value : null;
+        const scrollTop = document.querySelector(".chat-messages")?.scrollTop ?? 0;
+        try {
+          await loadData();
+          if (JSON.stringify(conversations) !== previous) {
+            const currentPath = routeParts().path;
+            if (currentPath === "/messages" || currentPath.startsWith("/messages/")) {
+              renderRoute();
+              const chatMessages = document.querySelector(".chat-messages");
+              if (chatMessages) chatMessages.scrollTop = scrollTop;
+              const messageInput = document.querySelector('[data-form="message"] textarea');
+              if (draft !== null && messageInput) messageInput.value = draft;
+            }
+          }
+        } catch (error) {
+          console.error("تعذّر تحديث المحادثات:", error.message);
+        } finally {
+          messagePollingInProgress = false;
+        }
+      }, 5000);
+    };
+    const escapeHTML = (value) => String(value ?? "").replace(/[&<>"']/g, (character) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    })[character]);
+    const getServices = () => services;
+    const getConversations = () => conversations;
+    const getAccount = (id) => accounts.find((account) => account.id === id) || null;
+    const categoryName = (id) => categories.find((category) => category.id === id)?.name || "أخرى";
+    const wilayaOptions = (selected = "") => `<option value="">${selected === "" ? "اختر الولاية" : "كل الولايات"}</option>${wilayas.map((name) => `<option value="${escapeHTML(name)}"${name === selected ? " selected" : ""}>${escapeHTML(name)}</option>`).join("")}`;
+    const categoryOptions = (selected = "") => `<option value="">${selected === "" ? "اختر التصنيف" : "كل التصنيفات"}</option>${categories.map((category) => `<option value="${category.id}"${category.id === selected ? " selected" : ""}>${category.name}</option>`).join("")}`;
+    const routeTo = (route) => { location.hash = route; };
+    const pageShell = (content) => `<section class="app-page"><div class="shell">${content}</div></section>`;
+    const formMessage = (id) => `<p id="${id}" class="form-message" role="status" aria-live="polite"></p>`;
+    const showFormMessage = (form, message, type = "error") => {
+      const output = form.querySelector(".form-message");
+      output.textContent = message;
+      output.className = `form-message visible ${type}`;
+    };
+    const setTitle = (title) => { document.title = `${title} — KHDEMLI`; };
+    const routeParts = () => {
+      const [path, query = ""] = location.hash.slice(1).split("?");
+      const requestedPath = path || (location.pathname.replace(/\/+$/, "").endsWith("/aa") ? "/aa" : "/");
+      return { path: requestedPath.endsWith("/aa") ? "/aa" : requestedPath, query: new URLSearchParams(query) };
+    };
+    const signedInUser = () => currentUser;
+    const syncAccountNav = () => {
+      const signedIn = Boolean(signedInUser());
+      document.querySelectorAll("[data-auth-link]").forEach((link) => { link.hidden = !signedIn; });
+      const navButtons = document.querySelectorAll(".nav-actions > a.button");
+      navButtons[0].href = signedIn ? "#/account" : authLink("login");
+      navButtons[0].textContent = signedIn ? "حسابي" : "تسجيل الدخول";
+      navButtons[1].href = signedIn ? "#/account" : authLink("signup");
+      navButtons[1].textContent = signedIn ? "لوحة التحكم" : "إنشاء حساب";
+      mobileMenu.innerHTML = signedIn
+        ? `<a href="#/services">تصفح الخدمات</a><a href="#/messages">المحادثات</a><a href="#/how-it-works">كيف تعمل المنصة؟</a><a href="#/account">حسابي</a><button class="button button-outline" type="button" data-action="logout">تسجيل الخروج</button>`
+        : `<a href="#/services">تصفح الخدمات</a><a href="#/how-it-works">كيف تعمل المنصة؟</a><a href="${authLink("login")}">تسجيل الدخول</a><a href="${authLink("signup")}">إنشاء حساب</a>`;
+    };
+    const authLink = (mode, next = "") => `#/auth?mode=${mode}${next ? `&next=${encodeURIComponent(next)}` : ""}`;
+    const requireLogin = (next) => {
+      if (signedInUser()) return true;
+      routeTo(authLink("signup", next));
+      return false;
+    };
+
+    const renderAuth = (mode, next) => {
+      const signup = mode === "signup";
+      const forgot = mode === "forgot";
+      const heading = signup ? "إنشاء حساب جديد" : forgot ? "استعادة كلمة المرور" : "تسجيل الدخول";
+      const intro = signup ? "أنشئ حسابًا واحدًا لإضافة الخدمات والتواصل عبر المحادثات." : forgot ? "استعادة كلمة المرور غير مفعّلة في هذا الخادم." : "مرحبًا بعودتك.";
+      const fields = forgot
+        ? `<div class="notice-box">لا توجد خدمة بريد لإرسال روابط إعادة التعيين. احتفظ بكلمة المرور في مكان آمن.</div>`
+        : signup
+          ? `<div class="form-grid">
+              <div class="field"><label for="first-name">الاسم</label><input id="first-name" name="firstName" autocomplete="given-name" maxlength="40" required></div>
+              <div class="field"><label for="last-name">اللقب</label><input id="last-name" name="lastName" autocomplete="family-name" maxlength="40" required></div>
+              <div class="field"><label for="wilaya">الولاية</label><select id="wilaya" name="wilaya" required>${wilayaOptions()}</select></div>
+              <div class="field full"><label for="auth-email">البريد الإلكتروني</label><input id="auth-email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+              <div class="field"><label for="auth-password">كلمة المرور</label><input id="auth-password" name="password" type="password" autocomplete="new-password" minlength="8" required><p class="field-hint">8 أحرف على الأقل، وتحتوي على حرف ورقم.</p></div>
+              <div class="field"><label for="password-confirm">تأكيد كلمة المرور</label><input id="password-confirm" name="confirm" type="password" autocomplete="new-password" minlength="8" required></div>
+              <label class="check-row field full"><input name="terms" type="checkbox" required><span>أوافق على <a href="#/terms">شروط الاستخدام</a> و<a href="#/privacy">سياسة الخصوصية</a>.</span></label>
+            </div>`
+          : `<div class="form-grid">
+              <div class="field full"><label for="auth-email">البريد الإلكتروني</label><input id="auth-email" name="email" type="email" autocomplete="email" required></div>
+              <div class="field full"><label for="auth-password">كلمة المرور</label><input id="auth-password" name="password" type="password" autocomplete="current-password" required></div>
+              <div class="field full"><a class="text-link" href="${authLink("forgot")}">نسيت كلمة المرور؟</a></div>
+            </div>`;
+      app.innerHTML = pageShell(`<div class="page-heading" style="text-align:center"><span class="brand-mark" style="margin:auto"><svg viewBox="0 0 32 32" fill="none"><path d="M8 6v20M8 16 23 6M12 16l12 10" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h1 style="margin-top:15px">${heading}</h1><p>${intro}</p></div>
+        <form class="form-card narrow" data-form="${forgot ? "forgot" : signup ? "signup" : "login"}" data-next="${escapeHTML(next)}" novalidate>
+          ${fields}
+          ${forgot ? "" : `<p class="form-note" style="margin-top:16px">يُحفظ حسابك وإعلاناتك ومحادثاتك على خادم المنصة، وتُحمى كلمة المرور.</p>
+          <div class="form-actions"><button class="button button-primary" type="submit">${signup ? "إنشاء حساب جديد" : "تسجيل الدخول"}</button><a class="button button-outline" href="#/services">تصفح الخدمات كزائر</a></div>`}
+          ${formMessage("auth-message")}
+          ${forgot ? `<p class="auth-switch"><a href="${authLink("login")}">العودة إلى تسجيل الدخول</a></p>` : `<p class="auth-switch">${signup ? "لديك حساب؟" : "ليس لديك حساب؟"} <a href="${authLink(signup ? "login" : "signup", next)}">${signup ? "سجّل الدخول" : "أنشئ حسابًا"}</a></p>`}
+        </form>`);
+      setTitle(heading);
+    };
+
+    const serviceCard = (service) => `<article class="listing-card">
+      <a class="service-card-link" href="#/services/${encodeURIComponent(service.id)}">
+        <div class="listing-top"><span class="tag">${escapeHTML(categoryName(service.category))}</span>${service.demo ? '<span class="tag demo">نموذج توضيحي</span>' : ""}</div>
+        <h2>${escapeHTML(service.title)}</h2><p>${escapeHTML(service.description)}</p>
+        <div class="listing-meta"><span>${escapeHTML(service.area)}</span><span class="listing-price">  ${Number(service.price).toLocaleString("ar-DZ")} دج</span></div>
+      </a>
+      ${signedInUser()?.id === service.owner ? `<button class="button button-outline service-delete" type="button" data-delete-service="${escapeHTML(service.id)}">حذف الخدمة</button>` : ""}
+    </article>`;
+    const renderServices = (query) => {
+      const category = query.get("category") || "";
+      const services = getServices();
+      app.innerHTML = pageShell(`<div class="page-heading"><h1>الخدمات</h1><p>ابحث عن الخدمات التي أضافها المستخدمون، وقارن التصنيف والولاية والسعر.</p></div>
+        <div class="page-tools"><a class="button button-primary" href="#/services/new">أضف خدمتك</a></div>
+        <form class="filter-card" id="service-filters">
+          <input name="search" type="search" placeholder="ابحث عن خدمة…" aria-label="ابحث عن خدمة">
+          <select name="category" aria-label="التصنيف">${categoryOptions(category)}</select>
+          <select name="area" aria-label="الولاية">${wilayaOptions("كل الولايات")}</select>
+          <input name="minPrice" type="number" min="0" placeholder="السعر من" aria-label="السعر الأدنى">
+          <input name="maxPrice" type="number" min="0" placeholder="السعر إلى" aria-label="السعر الأعلى">
+          <select name="sort" aria-label="ترتيب الخدمات"><option value="recent">الأحدث</option><option value="low">الأقل سعرًا</option><option value="high">الأعلى سعرًا</option></select>
+        </form>
+        <p class="result-note" id="service-count"></p><div class="listing-grid" id="service-results"></div>`);
+      const filters = document.querySelector("#service-filters");
+      const paint = () => {
+        const values = new FormData(filters);
+        const term = String(values.get("search") || "").trim().toLocaleLowerCase("ar");
+        const selectedCategory = values.get("category");
+        const selectedArea = values.get("area");
+        const minPrice = Number(values.get("minPrice")) || 0;
+        const maxPrice = Number(values.get("maxPrice")) || Infinity;
+        let visible = services.filter((service) =>
+          (!selectedCategory || service.category === selectedCategory) &&
+          (!selectedArea || service.area === selectedArea) &&
+          service.price >= minPrice && service.price <= maxPrice &&
+          (!term || `${service.title} ${service.description} ${categoryName(service.category)} ${service.area}`.toLocaleLowerCase("ar").includes(term))
+        );
+        if (values.get("sort") === "low") visible.sort((a, b) => a.price - b.price);
+        if (values.get("sort") === "high") visible.sort((a, b) => b.price - a.price);
+        if (values.get("sort") === "recent") visible.sort((a, b) => (b.createdAt || "").localeCompare(a.createdAt || ""));
+        document.querySelector("#service-count").textContent = `${visible.length} خدمات متاحة في هذه القائمة`;
+        document.querySelector("#service-results").innerHTML = visible.length ? visible.map(serviceCard).join("") : `<div class="empty-card" style="grid-column:1/-1"><h2>لا توجد خدمات مطابقة</h2><p>جرّب تغيير كلمات البحث أو التصنيف والولاية.</p></div>`;
+      };
+      filters.addEventListener("input", paint);
+      filters.addEventListener("change", paint);
+      paint();
+      setTitle("الخدمات");
+    };
+    const renderServiceForm = () => {
+      if (!requireLogin("/services/new")) return;
+      app.innerHTML = pageShell(`<div class="page-heading"><h1>أضف خدمتك</h1><p>عرّف العملاء بخبرتك والسعر الذي تبدأ منه.</p></div>
+        <form class="form-card" data-form="service">
+          <div class="form-grid">
+            <div class="field full"><label for="service-title">عنوان الخدمة</label><input id="service-title" name="title" maxlength="100" required></div>
+            <div class="field"><label for="service-category">التصنيف</label><select id="service-category" name="category" required>${categoryOptions()}</select></div>
+            <div class="field"><label for="service-area">الولاية</label><select id="service-area" name="area" required>${wilayaOptions()}</select></div>
+            <div class="field"><label for="service-price">السعر الابتدائي (دج)</label><input id="service-price" name="price" type="number" min="1" max="100000000" inputmode="numeric" required></div>
+            <div class="field full"><label for="service-description">وصف الخدمة</label><textarea id="service-description" name="description" minlength="20" maxlength="3000" required></textarea></div>
+          </div>
+          <p class="form-note" style="margin-top:16px">ستُحفظ خدمتك على خادم المنصة لتظهر لجميع المستخدمين.</p>
+          <div class="form-actions"><button class="button button-primary" type="submit">حفظ الخدمة</button><a class="button button-outline" href="#/services">إلغاء</a></div>${formMessage("service-message")}
+        </form>`);
+      setTitle("إضافة خدمة");
+    };
+    const renderDetail = (id) => {
+      const record = getServices().find((item) => item.id === id);
+      if (!record) {
+        app.innerHTML = pageShell(`<div class="empty-card"><h2>لم نعثر على هذه الخدمة</h2><p>قد يكون الرابط غير صحيح أو أن الخدمة لم تعد موجودة.</p><a class="button button-primary" href="#/services">العودة للخدمات</a></div>`);
+        setTitle("غير موجود");
+        return;
+      }
+      const category = categoryName(record.category);
+      const user = signedInUser();
+      const isOwner = user?.id === record.owner;
+      const contactAction = user && !isOwner
+        ? `<button class="button button-primary" type="button" data-contact-service="${escapeHTML(record.id)}">محادثة صاحب الخدمة</button>`
+        : !user
+          ? `<a class="button button-primary" href="${authLink("signup", `/services/${encodeURIComponent(record.id)}`)}">سجّل الدخول لمحادثة صاحب الخدمة</a>`
+          : "";
+      const ownerServicesLink = `<a class="button button-outline" href="#/accounts/${encodeURIComponent(record.owner)}">ملف مقدم الخدمة وتقييماته</a>`;
+      app.innerHTML = pageShell(`<article class="detail-card">
+        <div class="listing-top"><span class="tag">${escapeHTML(category)}</span></div>
+        <h1>${escapeHTML(record.title)}</h1><p class="listing-meta" style="margin:0;padding:0">${escapeHTML(record.area)} · ${Number(record.price).toLocaleString("ar-DZ")} دج</p>
+        <p class="result-note">صاحب الخدمة: ${escapeHTML(record.ownerName || "مستخدم")}</p>
+        <p class="detail-description">${escapeHTML(record.description)}</p>
+        <div class="notice-box">${isOwner ? "هذه خدمتك المنشورة." : "ابدأ محادثة خاصة مع صاحب الخدمة للاستفسار والتواصل مباشرة."} يتم الاتفاق والدفع خارج المنصة.</div>
+        <div class="form-actions">${contactAction}${ownerServicesLink}${isOwner ? `<button class="button button-outline service-delete" type="button" data-delete-service="${escapeHTML(record.id)}">حذف الخدمة</button><a class="button button-outline" href="#/messages">محادثاتي</a>` : ""}<a class="button button-outline" href="#/services">العودة إلى الخدمات</a></div>
+      </article>`);
+      setTitle(record.title);
+    };
+    const renderAccountProfile = async (accountId) => {
+      try {
+        const { account, rating, reviews, canReview, ownReview } = await apiRequest(`/api/accounts/${encodeURIComponent(accountId)}/profile`);
+        if (routeParts().path !== `/accounts/${accountId}` && routeParts().path !== `/accounts/${accountId}/services`) return;
+        const ownServices = getServices().filter((service) => String(service.owner) === String(account.id));
+        const average = rating.average === null ? "لا توجد تقييمات بعد" : `${rating.average.toFixed(1)} / 5`;
+        const stars = rating.average === null ? "" : `<span class="rating-stars" aria-label="متوسط التقييم ${rating.average.toFixed(1)} من 5">${"★".repeat(Math.round(rating.average))}${"☆".repeat(5 - Math.round(rating.average))}</span>`;
+        const reviewForm = canReview
+          ? `<form class="rating-form" data-form="review" data-account="${account.id}">
+              <h3>${ownReview ? "تعديل تقييمك لمقدم الخدمة" : "قيّم مقدم الخدمة"}</h3>
+              <p class="form-note">التقييم لصاحب الحساب، وليس لإعلان خدمة بعينه. يمكنك تحديث تقييمك لاحقاً.</p>
+              <div class="form-grid" style="margin-top:14px">
+                <div class="field"><label for="provider-rating">تقييمك</label><select id="provider-rating" name="rating" required>
+                  <option value="">اختر عدد النجوم</option>
+                  ${[5, 4, 3, 2, 1].map((value) => `<option value="${value}"${ownReview?.rating === value ? " selected" : ""}>${"★".repeat(value)}${"☆".repeat(5 - value)} — ${value} من 5</option>`).join("")}
+                </select></div>
+                <div class="field full"><label for="provider-review">اكتب عن تجربتك مع مقدم الخدمة</label><textarea id="provider-review" name="comment" minlength="5" maxlength="1000" required>${escapeHTML(ownReview?.comment || "")}</textarea></div>
+              </div>
+              <div class="form-actions"><button class="button button-primary" type="submit">${ownReview ? "حفظ التعديلات" : "إرسال التقييم"}</button></div>${formMessage("review-message")}
+            </form>`
+          : signedInUser()
+            ? `<div class="notice-box">يتاح تقييم مقدم الخدمة بعد تبادل الرسائل بينكما في محادثة خدمة عبر المنصة.</div>`
+            : `<div class="notice-box"><a class="text-link" href="${authLink("login", `/accounts/${encodeURIComponent(account.id)}`)}">سجّل الدخول</a> لمشاهدة إمكانية التقييم بعد التواصل مع مقدم الخدمة.</div>`;
+        const reviewCards = reviews.map((review) => {
+          const date = new Date(review.updatedAt || review.createdAt);
+          const dateLabel = Number.isNaN(date.getTime()) ? "" : date.toLocaleDateString("ar-DZ");
+          return `<article class="rating-review">
+            <header class="rating-review-header"><strong>${escapeHTML(review.reviewerName)}</strong><time>${escapeHTML(dateLabel)}</time></header>
+            <div class="rating-stars" aria-label="${review.rating} من 5">${"★".repeat(review.rating)}${"☆".repeat(5 - review.rating)}</div>
+            <p>${escapeHTML(review.comment)}</p>
+          </article>`;
+        }).join("");
+        app.innerHTML = pageShell(`<div class="page-heading"><a class="text-link" href="#/services">العودة إلى الخدمات</a></div>
+          <section class="detail-card">
+            <div class="profile-card" style="padding:0;margin:0;border:0">
+              <span class="profile-avatar">${escapeHTML(account.name.trim().slice(0, 1))}</span>
+              <div><h2>${escapeHTML(account.name)}</h2><p>${escapeHTML(account.wilaya)}</p></div>
+            </div>
+            <h2 style="font-size:19px;margin:24px 0 0">تقييم مقدم الخدمة</h2>
+            <div class="rating-summary">${stars}<span class="rating-average">${escapeHTML(average)}</span><span class="rating-count">عدد تقييمات هذا الشخص: ${Number(rating.count).toLocaleString("ar-DZ")}</span></div>
+            ${reviewForm}
+            <h2 style="font-size:19px;margin:28px 0 0">آراء العملاء عن ${escapeHTML(account.name)}</h2>
+            <div class="rating-list">${reviewCards || `<p class="form-note" style="margin-top:14px">لم يقيّم أحد هذا الحساب بعد.</p>`}</div>
+            <h2 style="font-size:19px;margin:30px 0 14px">الخدمات التي يقدمها هذا الشخص</h2>
+            <div class="listing-grid">${ownServices.length ? ownServices.map(serviceCard).join("") : `<p class="form-note">لا توجد خدمات منشورة حالياً.</p>`}</div>
+          </section>`);
+        setTitle(`ملف ${account.name}`);
+      } catch (error) {
+        app.innerHTML = pageShell(`<div class="empty-card"><h2>تعذّر تحميل ملف مقدم الخدمة</h2><p>${escapeHTML(error.message)}</p><a class="button button-primary" href="#/services">العودة إلى الخدمات</a></div>`);
+        setTitle("ملف غير متاح");
+      }
+    };
+    const renderMessages = () => {
+      const user = signedInUser();
+      if (!user) { routeTo(authLink("login", "/messages")); return; }
+      const ownConversations = getConversations().filter((conversation) => conversation.participants?.includes(user.id));
+      const cards = ownConversations.map((conversation) => {
+        const otherId = conversation.participants.find((id) => id !== user.id);
+        const other = getAccount(otherId);
+        const service = getServices().find((item) => item.id === conversation.serviceId);
+        const lastMessage = conversation.messages?.at(-1);
+        return `<a class="conversation-card" href="#/messages/${encodeURIComponent(conversation.id)}">
+          <span class="profile-avatar">${escapeHTML((other?.name || "م").trim().slice(0, 1))}</span>
+          <div class="conversation-copy"><h2>${escapeHTML(other?.name || "مستخدم")} · ${escapeHTML(service?.title || "خدمة محذوفة")}</h2><p>${escapeHTML(lastMessage?.text || "ابدأ المحادثة الآن")}</p></div>
+          <span class="tag">فتح المحادثة</span>
+        </a>`;
+      }).join("");
+      app.innerHTML = pageShell(`<div class="page-heading"><h1>المحادثات</h1><p>تابع رسائلك مع أصحاب الخدمات.</p></div>
+        ${cards || `<div class="empty-card"><h2>لا توجد محادثات بعد</h2><p>تصفح الخدمات وابدأ محادثة مع صاحب الخدمة.</p><a class="button button-primary" href="#/services">تصفح الخدمات</a></div>`}`);
+      setTitle("المحادثات");
+    };
+    const renderConversation = (conversationId) => {
+      const user = signedInUser();
+      if (!user) { routeTo(authLink("login", `/messages/${encodeURIComponent(conversationId)}`)); return; }
+      const conversation = getConversations().find((item) => item.id === conversationId && item.participants?.includes(user.id));
+      if (!conversation) {
+        app.innerHTML = pageShell(`<div class="empty-card"><h2>لم نعثر على هذه المحادثة</h2><p>تحقق من الرابط أو افتح محادثة تخص حسابك.</p><a class="button button-primary" href="#/messages">العودة إلى المحادثات</a></div>`);
+        setTitle("محادثة غير موجودة");
+        return;
+      }
+      const other = getAccount(conversation.participants.find((id) => id !== user.id));
+      const service = getServices().find((item) => item.id === conversation.serviceId);
+      const messages = conversation.messages.map((message) => {
+        const date = new Date(message.createdAt);
+        const time = Number.isNaN(date.getTime()) ? "" : date.toLocaleString("ar-DZ");
+        return `<article class="chat-message${message.sender === user.id ? " mine" : ""}"><p>${escapeHTML(message.text)}</p><time>${escapeHTML(time)}</time></article>`;
+      }).join("");
+      app.innerHTML = pageShell(`<div class="page-heading"><a class="text-link" href="#/messages">العودة إلى المحادثات</a></div>
+        <section class="chat-panel">
+          <header class="chat-header"><h2>${escapeHTML(other?.name || "مستخدم")}</h2><p>بخصوص الخدمة: ${escapeHTML(service?.title || "خدمة محذوفة")}</p></header>
+          <div class="chat-messages" aria-live="polite">${messages || `<p class="result-note">ابدأ المحادثة برسالتك الأولى.</p>`}</div>
+          <form class="chat-form" data-form="message" data-conversation="${escapeHTML(conversation.id)}">
+            <div class="field"><label for="chat-message">رسالتك</label><textarea id="chat-message" name="message" maxlength="1000" placeholder="اكتب رسالتك هنا…" required></textarea></div>
+            <button class="button button-primary" type="submit">إرسال</button>
+          </form>
+          <p class="form-note" style="padding:0 15px 15px">المحادثة خاصة بين المشاركين، وقد يراجعها المشرف عند الحاجة للإشراف؛ وتُسجل عمليات الاطلاع.</p>
+        </section>`);
+      setTitle("محادثة");
+    };
+    const renderDashboard = () => {
+      const user = signedInUser();
+      if (!user) { routeTo(authLink("login")); return; }
+      const services = getServices().filter((item) => item.owner === user.id);
+      app.innerHTML = pageShell(`<div class="page-heading"><h1>حسابي</h1><p>أدر خدماتك وتابع محادثاتك من حسابك.</p></div>
+        <div class="profile-card"><span class="profile-avatar">${escapeHTML(user.name.trim().slice(0, 1))}</span><div><h2>${escapeHTML(user.name)}</h2><p>${escapeHTML(user.email)} · ${escapeHTML(user.wilaya)}</p></div><button class="button button-outline" type="button" data-action="logout">تسجيل الخروج</button></div>
+        <div class="page-tools"><a class="button button-primary" href="#/services/new">أضف خدمتك</a></div>
+        <section class="chat-shortcut" aria-label="الشات">
+          <div><h2>الشات والمحادثات</h2><p>تابع رسائلك مع أصحاب الخدمات أو المهتمين بخدماتك.</p></div>
+          <a class="button button-primary" href="#/messages">افتح المحادثات</a>
+        </section>
+        <h2 style="font-size:21px;margin:30px 0 14px">خدماتي</h2><div class="listing-grid">${services.length ? services.map(serviceCard).join("") : `<div class="empty-card" style="grid-column:1/-1"><p>لم تضف خدمات بعد.</p><a class="button button-outline" href="#/services/new">أضف خدمتك</a></div>`}</div>`);
+      setTitle("حسابي");
+    };
+    const renderAdmin = async (selectedConversationId = null) => {
+      try {
+        const status = await apiRequest("/api/admin/auth/me");
+        adminAuthenticated = status.authenticated;
+        if (!status.enabled) {
+          app.innerHTML = pageShell(`<div class="empty-card admin-shell">
+            <h2>إعداد غرفة الإدارة مطلوب</h2>
+            <p>اضبط متغير البيئة <code>ADMIN_PASSWORD</code> بكلمة مرور عشوائية لا تقل عن 16 حرفاً، ثم أعد تشغيل الخادم.</p>
+          </div>`);
+          setTitle("إعداد غرفة الإدارة");
+          return;
+        }
+        if (!status.authenticated) {
+          app.innerHTML = pageShell(`<form class="form-card narrow" data-form="admin-login">
+            <div class="page-heading" style="text-align:center"><h1>دخول الإدارة</h1><p>هذه الصفحة للمشرفين فقط.</p></div>
+            <div class="field"><label for="admin-password">كلمة مرور المشرف</label><input id="admin-password" name="password" type="password" autocomplete="current-password" maxlength="128" required></div>
+            <div class="form-actions"><button class="button button-primary" type="submit">دخول</button><a class="button button-outline" href="#/">العودة للموقع</a></div>
+            ${formMessage("admin-login-message")}
+          </form>`);
+          setTitle("دخول الإدارة");
+          return;
+        }
+        const [serviceData, conversationData] = await Promise.all([
+          apiRequest("/api/admin/services"),
+          apiRequest("/api/admin/conversations")
+        ]);
+        let selected = null;
+        if (selectedConversationId) {
+          selected = await apiRequest(`/api/admin/conversations/${encodeURIComponent(selectedConversationId)}`);
+        }
+        if (routeParts().path !== "/aa") return;
+        const serviceRows = serviceData.services.map((service) => `<article class="admin-row">
+          <div class="admin-row-copy"><h3>${escapeHTML(service.title)}</h3><p>${escapeHTML(service.ownerName)} · ${escapeHTML(service.area)} · ${Number(service.price).toLocaleString("ar-DZ")} دج</p></div>
+          <button class="button button-outline service-delete" type="button" data-admin-delete-service="${escapeHTML(service.id)}">حذف الخدمة</button>
+        </article>`).join("");
+        const conversationRows = conversationData.conversations.map((conversation) => `<article class="admin-row">
+          <div class="admin-row-copy"><h3>${escapeHTML(conversation.requesterName)} ↔ ${escapeHTML(conversation.providerName)}</h3><p>${escapeHTML(conversation.serviceTitle)} · ${Number(conversation.messageCount).toLocaleString("ar-DZ")} رسالة</p></div>
+          <button class="button button-outline" type="button" data-admin-conversation="${escapeHTML(conversation.id)}">عرض المحادثة</button>
+        </article>`).join("");
+        const selectedMessages = selected ? `<section class="detail-card" style="margin-top:22px">
+          <h2 style="margin-top:0;font-size:18px">${escapeHTML(selected.conversation.requesterName)} ↔ ${escapeHTML(selected.conversation.providerName)}</h2>
+          <p class="form-note" style="margin-bottom:14px">الخدمة: ${escapeHTML(selected.conversation.serviceTitle)}. سُجل اطلاع المشرف على هذه المحادثة.</p>
+          <div class="admin-messages">${selected.messages.length ? selected.messages.map((message) => {
+            const date = new Date(message.createdAt);
+            const time = Number.isNaN(date.getTime()) ? "" : date.toLocaleString("ar-DZ");
+            return `<article class="chat-message"><strong>${escapeHTML(message.senderName)}</strong><p style="margin-top:6px">${escapeHTML(message.text)}</p><time>${escapeHTML(time)}</time></article>`;
+          }).join("") : `<p class="form-note">لا توجد رسائل في هذه المحادثة.</p>`}</div>
+        </section>` : "";
+        app.innerHTML = pageShell(`<div class="admin-shell">
+          <div class="page-heading"><h1>غرفة الإدارة</h1><p>إدارة الخدمات ومراجعة المحادثات. يُسجل النظام عمليات حذف الخدمات وفتح المحادثات.</p></div>
+          <div class="page-tools"><button class="button button-outline" type="button" data-admin-refresh>تحديث البيانات</button><button class="button button-outline" type="button" data-admin-logout>تسجيل الخروج من الإدارة</button></div>
+          <div class="admin-tabs"><a class="button button-outline" href="#/aa">لوحة الإدارة</a><a class="button button-outline" href="#/privacy">سياسة الخصوصية</a></div>
+          <section><h2 style="font-size:20px;margin:24px 0 14px">الخدمات (${serviceData.services.length})</h2>
+            <div class="admin-list">${serviceRows || `<p class="form-note">لا توجد خدمات لحذفها.</p>`}</div>
+          </section>
+          <section><h2 style="font-size:20px;margin:30px 0 14px">المحادثات (${conversationData.conversations.length})</h2>
+            <div class="admin-list">${conversationRows || `<p class="form-note">لا توجد محادثات.</p>`}</div>
+          </section>
+          ${selectedMessages}
+        </div>`);
+        setTitle("غرفة الإدارة");
+      } catch (error) {
+        adminAuthenticated = false;
+        app.innerHTML = pageShell(`<div class="empty-card admin-shell"><h2>تعذّر تحميل غرفة الإدارة</h2><p>${escapeHTML(error.message)}</p><button class="button button-primary" type="button" data-admin-refresh>إعادة المحاولة</button></div>`);
+        setTitle("خطأ الإدارة");
+      }
+    };
+    const renderLegal = (type) => {
+      const privacy = type === "privacy";
+      app.innerHTML = pageShell(`<div class="page-heading"><h1>${privacy ? "سياسة الخصوصية" : "شروط الاستخدام"}</h1><p>معلومات واضحة حول استخدام المنصة.</p></div>
+        <article class="legal-copy">
+          <h2>${privacy ? "البيانات المحفوظة" : "استخدام المنصة"}</h2>
+          <p>${privacy ? "تُحفظ بيانات الحساب والخدمات والمحادثات في قاعدة بيانات الخادم لتعمل عبر الأجهزة. لا تحفظ كلمة المرور بصيغتها الأصلية، وتُستخدم ملفات ارتباط آمنة لإدارة تسجيل الدخول." : "تُحفظ الخدمات والمحادثات على خادم المنصة لتكون متاحة للمستخدمين المسجلين."}</p>
+          <h2>${privacy ? "كلمات المرور" : "التواصل والدفع"}</h2>
+          <p>${privacy ? "تُخزَّن كلمات المرور باستخدام تجزئة آمنة، وتُنقل كلمات مرور الحسابات القديمة إلى تنسيق جديد عند تفعيل الحساب. المحادثات متاحة للمشاركين فيها، وقد يراجعها مشرف المنصة عند الحاجة إلى الإشراف، وتُسجل عمليات اطلاع المشرف." : "يمكن مراسلة صاحب الخدمة عبر محادثة خاصة داخل الموقع. قد يراجعها مشرف المنصة لأغراض الإشراف، وتُسجل عمليات الاطلاع. لا تتوفر مدفوعات إلكترونية؛ يتم الاتفاق والدفع خارج المنصة."}</p>
+          <h2>حذف البيانات</h2><p>يمكن حذف بيانات الحساب أو طلب حذفها من إدارة المنصة. الاحتفاظ بنسخة احتياطية من ملف قاعدة البيانات مسؤولية مشغّل الموقع.</p>
+        </article>`);
+      setTitle(privacy ? "سياسة الخصوصية" : "شروط الاستخدام");
+    };
+    const renderRoute = () => {
+      const { path, query } = routeParts();
+      syncAccountNav();
+      if (path === "/" || path === "/home") {
+        app.innerHTML = homeMarkup;
+        setTitle("منصة الفريلانس الجزائرية");
+      } else if (path === "/how-it-works") {
+        app.innerHTML = homeMarkup;
+        setTitle("كيف تعمل المنصة؟");
+        requestAnimationFrame(() => document.querySelector("#how-it-works").scrollIntoView());
+      } else if (path === "/aa") renderAdmin();
+      else if (path === "/services") renderServices(query);
+      else if (path === "/services/new") renderServiceForm();
+      else if (path === "/account") renderDashboard();
+      else if (path === "/messages") renderMessages();
+      else if (path.startsWith("/messages/")) renderConversation(decodeURIComponent(path.slice("/messages/".length)));
+      else if (path === "/terms" || path === "/privacy") renderLegal(path.slice(1));
+      else if (/^\/accounts\/[^/]+(?:\/services)?$/.test(path)) renderAccountProfile(decodeURIComponent(path.split("/")[2]));
+      else if (path.startsWith("/services/")) renderDetail(decodeURIComponent(path.slice("/services/".length)));
+      else if (path === "/auth") renderAuth(query.get("mode") || "login", query.get("next") || "");
+      else {
+        app.innerHTML = pageShell(`<div class="empty-card"><h2>الصفحة غير موجودة</h2><a class="button button-primary" href="#/">العودة للرئيسية</a></div>`);
+        setTitle("غير موجود");
+      }
+      mobileMenu.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      syncMessagePolling();
+    };
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "فتح القائمة" : "إغلاق القائمة");
+      mobileMenu.classList.toggle("open", !isOpen);
+    });
+    mobileMenu.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "فتح القائمة");
+        mobileMenu.classList.remove("open");
+      }
+    });
+    document.addEventListener("click", async (event) => {
+      if (event.target.closest("[data-admin-refresh]")) {
+        await renderAdmin();
+        return;
+      }
+      if (event.target.closest("[data-admin-logout]")) {
+        try {
+          await apiRequest("/api/admin/auth/logout", { method: "POST" });
+          adminAuthenticated = false;
+          await renderAdmin();
+        } catch (error) {
+          window.alert(error.message);
+        }
+        return;
+      }
+      const adminConversationButton = event.target.closest("[data-admin-conversation]");
+      if (adminConversationButton) {
+        await renderAdmin(adminConversationButton.dataset.adminConversation);
+        return;
+      }
+      const adminDeleteButton = event.target.closest("[data-admin-delete-service]");
+      if (adminDeleteButton) {
+        const serviceId = adminDeleteButton.dataset.adminDeleteService;
+        if (!window.confirm("حذف الخدمة سيحذف محادثاتها ورسائلها المرتبطة. هل تريد المتابعة؟")) return;
+        adminDeleteButton.disabled = true;
+        try {
+          await apiRequest(`/api/admin/services/${encodeURIComponent(serviceId)}`, { method: "DELETE" });
+          await renderAdmin();
+        } catch (error) {
+          window.alert(error.message);
+          adminDeleteButton.disabled = false;
+        }
+        return;
+      }
+      const deleteButton = event.target.closest("[data-delete-service]");
+      if (deleteButton) {
+        const serviceId = deleteButton.dataset.deleteService;
+        const service = getServices().find((item) => item.id === serviceId);
+        if (!service || service.owner !== signedInUser()?.id) return;
+        if (!window.confirm("هل تريد حذف هذه الخدمة؟ سيتم حذف محادثاتها ورسائلها أيضًا.")) return;
+        deleteButton.disabled = true;
+        try {
+          await apiRequest(`/api/services/${encodeURIComponent(serviceId)}`, { method: "DELETE" });
+          await loadData();
+          renderRoute();
+        } catch (error) {
+          window.alert(error.message);
+          deleteButton.disabled = false;
+        }
+        return;
+      }
+      const contactButton = event.target.closest("[data-contact-service]");
+      if (contactButton) {
+        const serviceId = contactButton.dataset.contactService;
+        const service = serviceId ? getServices().find((item) => item.id === serviceId) : null;
+        const user = signedInUser();
+        if (!service || service.owner === user?.id) return;
+        const detailRoute = `/services/${encodeURIComponent(service.id)}`;
+        if (!user) return routeTo(authLink("signup", detailRoute));
+        contactButton.disabled = true;
+        try {
+          const result = await apiRequest("/api/conversations", {
+            method: "POST",
+            body: JSON.stringify({ serviceId: service.id })
+          });
+          await loadData();
+          routeTo(`#/messages/${encodeURIComponent(result.conversation.id)}`);
+        } catch (error) {
+          window.alert(error.message);
+          contactButton.disabled = false;
+        }
+        return;
+      }
+      if (event.target.closest('[data-action="logout"]')) {
+        try {
+          await apiRequest("/api/auth/logout", { method: "POST" });
+          await loadData();
+          routeTo("/");
+        } catch (error) {
+          window.alert(error.message);
+        }
+      }
+    });
+    document.addEventListener("submit", async (event) => {
+      const form = event.target.closest("form[data-form]");
+      if (!form) return;
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const values = new FormData(form);
+      const value = (name) => String(values.get(name) || "").trim();
+      const message = (text, type) => showFormMessage(form, text, type);
+      try {
+        if (form.dataset.form === "signup") {
+          const firstName = value("firstName");
+          const lastName = value("lastName");
+          const email = value("email").toLowerCase();
+          const password = value("password");
+          const confirm = value("confirm");
+          if (!firstName || !lastName) return message("أدخل الاسم واللقب بشكل صحيح.", "error");
+          if (!/[A-Za-z\u0600-\u06FF]/.test(password) || !/[0-9]/.test(password)) return message("يجب أن تحتوي كلمة المرور على حرف ورقم.", "error");
+          if (password !== confirm) return message("كلمتا المرور غير متطابقتين.", "error");
+          await apiRequest("/api/auth/signup", {
+            method: "POST",
+            body: JSON.stringify({
+              firstName, lastName, email, password,
+              wilaya: value("wilaya")
+            })
+          });
+          await loadData();
+          const next = form.dataset.next;
+          routeTo(next && next.startsWith("/") ? `#${next}` : "#/account");
+        } else if (form.dataset.form === "login") {
+          await apiRequest("/api/auth/login", {
+            method: "POST",
+            body: JSON.stringify({ email: value("email"), password: value("password") })
+          });
+          await loadData();
+          const next = form.dataset.next;
+          routeTo(next && next.startsWith("/") ? `#${next}` : "#/account");
+        } else if (form.dataset.form === "forgot") {
+          const password = value("password");
+          if (!/[A-Za-z\u0600-\u06FF]/.test(password) || !/[0-9]/.test(password)) return message("يجب أن تحتوي كلمة المرور على حرف ورقم.", "error");
+          if (password !== value("confirm")) return message("كلمتا المرور غير متطابقتين.", "error");
+          await apiRequest("/api/auth/migrate-password", {
+            method: "POST",
+            body: JSON.stringify({ email: value("email"), token: value("token"), password })
+          });
+          await loadData();
+          routeTo("#/account");
+        } else if (form.dataset.form === "admin-login") {
+          await apiRequest("/api/admin/auth/login", {
+            method: "POST",
+            body: JSON.stringify({ password: value("password") })
+          });
+          adminAuthenticated = true;
+          await renderAdmin();
+        } else if (form.dataset.form === "review") {
+          const accountId = form.dataset.account;
+          await apiRequest(`/api/accounts/${encodeURIComponent(accountId)}/reviews`, {
+            method: "POST",
+            body: JSON.stringify({ rating: Number(value("rating")), comment: value("comment") })
+          });
+          await renderAccountProfile(accountId);
+        } else if (form.dataset.form === "service") {
+          const user = signedInUser();
+          if (!user) return routeTo(authLink("login", "/services/new"));
+          await apiRequest("/api/services", {
+            method: "POST",
+            body: JSON.stringify({
+              title: value("title"), category: value("category"), area: value("area"),
+              price: Number(value("price")), description: value("description")
+            })
+          });
+          await loadData();
+          routeTo("#/account");
+        } else if (form.dataset.form === "message") {
+          const user = signedInUser();
+          if (!user) return routeTo(authLink("login", "/messages"));
+          const conversation = getConversations().find((item) =>
+            item.id === form.dataset.conversation && item.participants?.includes(user.id)
+          );
+          if (!conversation) return message("لا يمكن العثور على محادثة تخص حسابك.", "error");
+          const text = value("message");
+          if (!text) return message("اكتب رسالتك قبل الإرسال.", "error");
+          await apiRequest("/api/messages", {
+            method: "POST",
+            body: JSON.stringify({ conversationId: conversation.id, text })
+          });
+          await loadData();
+          renderConversation(conversation.id);
+        }
+      } catch (error) {
+        message(`تعذّر إكمال العملية: ${error.message}`, "error");
+      }
+    });
+    window.addEventListener("hashchange", renderRoute);
+    loadData().then(renderRoute).catch((error) => {
+      app.innerHTML = pageShell(`<div class="empty-card"><h2>تعذّر الاتصال بالخادم</h2><p>${escapeHTML(error.message)}</p><button class="button button-primary" type="button" onclick="location.reload()">إعادة المحاولة</button><p class="form-note">تأكد من تشغيل خادم الموقع باستخدام <code>npm start</code>.</p></div>`);
+      setTitle("تعذّر الاتصال");
+    });
+  </script>
+</body>
+</html>
